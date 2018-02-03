@@ -27,9 +27,14 @@ app.post('/todos', (req, res) => {
     })
 });
 
-
-app.get('/', (req, res) => {
-    res.render('../index.jade')
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({
+            todos
+        });
+    }, (e) => {
+        res.status(400).send(e);
+    });
 })
 
 
